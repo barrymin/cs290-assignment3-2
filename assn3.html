@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>assn3</title>
+  <script src = 'assn3.js'> </script>
+  <link rel="Stylesheet" href="assn3.css">
+</head>
+<body>
+  <div class="top">
+    <input type="radio" name="language" value="JavaScript">JavaScript
+	<input type="radio" name="language" value="SQL">SQL
+	<input type="radio" name="language" value="JSON">JSON
+	<input type="radio" name="language" value="Python">Python
+	<input type="number" name="pages">
+	<input type="button" name="fetch" onclick="fetchData()" value="Display Gists">
+  </div>
+  
+  <div class="bottom" id="faves">
+	<div class="leftCol">
+	  <h3>Favourites</h3>
+	</div>
+	
+	<div class="rightCol" id="gists">
+	  <h3>Gists</h3>
+	  <div class="gist">
+	    <input type="button" name="faveButton" value="+">
+	    <p>
+		  If you want to render some ERB, you have to require action_view
+		    <a href="https://api.github.com/gists/2dfffcafc5c14d5c1323"> https://api.github.com/gists/2dfffcafc5c14d5c1323</a>
+		</p>
+	  </div>
+	</div>
+	
+  </div>
+	
+</body>
+</html>

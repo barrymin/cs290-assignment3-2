@@ -1,0 +1,38 @@
+.top{
+  margin-left: 12%;
+  text-align: center;
+  padding:10px; 
+  width: 62%;
+}
+
+.rightCol{
+  line-height:30px;
+  background-color:#eeeeee;
+  float:left;
+  padding:5px; 
+  margin-right: 12%;
+  width: 30%;
+}
+
+.leftCol{
+  line-height:30px;
+  background-color:#eeeeee;
+  float:left;
+  padding:5px; 
+  margin-right: 10%;
+  margin-left: 12%;
+  width: 30%;
+}
+
+input[name = "faveButton"] {
+  float: left;
+  margin: 2px;
+}
+
+div.gist {
+
+}
+
+p {
+  font-size: 75%;
+}
