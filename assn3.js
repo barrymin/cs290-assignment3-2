@@ -22,10 +22,8 @@ function displayFavourites() {
 function addFavourite(gist) {
   var i;
   //check if gist was already added
-  for (i = 0; i < faveList.length; i++) {
-    if(faveList[i].id == gist.childNodes[0].getAttribute("id"))
+  if(inFaveList(gist.childNodes[0].getAttribute("id")))
 		return;
-  }
   gist.setAttribute('class', 'FaveGist');
   gist.childNodes[0].setAttribute('value', '-');
   gist.childNodes[0].onclick = function() {
@@ -41,7 +39,14 @@ function addFavourite(gist) {
     localStorage.setItem("gists",JSON.stringify(faveList));
 }
 function deleteFavourite(gist){
-  console.log("in delete yay!");
+  var i;
+  for(i = 0; i < faveList.length; i++){
+    if(faveList[i].id == gist.childNodes[0].getAttribute("id")){
+      faveList.splice(i,1);
+	}
+  }
+  localStorage.setItem("gists",JSON.stringify(faveList));
+  gist.remove();
 }
 function fetchData() {
   var httpRequest;
