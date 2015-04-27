@@ -59,7 +59,14 @@ function fetchData() {
       }
     }
   };
-  httpRequest.open('GET', ' https://api.github.com/gists');
+  var pages = document.getElementsByName("pages")[0].value;
+  if (pages >= 1 && pages <= 5) {
+    httpRequest.open('GET', 'https://api.github.com/gists?page=2&per_page='
+      + (pages * 30));
+  } else {
+	document.getElementsByName("pages")[0].value = 1;
+    httpRequest.open('GET', 'https://api.github.com/gists');
+  }
   httpRequest.send();
 }
 
