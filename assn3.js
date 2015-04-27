@@ -1,51 +1,45 @@
 var faveList = [];
-window.onload = function () {
-  displayFavourites();
-
-};
-function Gist (id, desc, url) {
+function Gist(id, desc, url) {
   this.id = id;
   this.desc = desc;
   this.url = url;
 }
-
 function displayFavourites() {
-  if(localStorage.getItem("gists") != null){
+  if (localStorage.getItem("gists") !== null) {
     var temp = JSON.parse(localStorage.getItem("gists"));
-	console.log(temp);
     var i;
-    for(i = 0; i < temp.length; i++){
+    for (i = 0; i < temp.length; i++) {
       addFavourite(createGistDiv(temp[i].id, temp[i].desc, temp[i].url));
     }
   }
 }
 function addFavourite(gist) {
-  var i;
   //check if gist was already added
-  if(inFaveList(gist.childNodes[0].getAttribute("id")))
-		return;
+  if (inFaveList(gist.childNodes[0].getAttribute("id"))) {
+    return;
+  }
   gist.setAttribute('class', 'FaveGist');
   gist.childNodes[0].setAttribute('value', '-');
-  gist.childNodes[0].onclick = function() {
+  gist.childNodes[0].onclick = function () {
     deleteFavourite(gist);
-  }
+  };
   var faves = document.getElementById('faves');
   faves.appendChild(gist);
-  faveList[faveList.length] = new Gist (gist.childNodes[0].getAttribute("id"),
+  faveList[faveList.length] = new Gist(gist.childNodes[0].getAttribute("id"),
       gist.childNodes[1].childNodes[0].textContent,
       gist.childNodes[1].childNodes[1].textContent
     );
-	console.log(faveList);
-    localStorage.setItem("gists",JSON.stringify(faveList));
+  localStorage.setItem("gists", JSON.stringify(faveList));
 }
-function deleteFavourite(gist){
+
+function deleteFavourite(gist) {
   var i;
-  for(i = 0; i < faveList.length; i++){
-    if(faveList[i].id == gist.childNodes[0].getAttribute("id")){
-      faveList.splice(i,1);
-	}
+  for (i = 0; i < faveList.length; i++) {
+    if (faveList[i].id === gist.childNodes[0].getAttribute("id")) {
+      faveList.splice(i, 1);
+    }
   }
-  localStorage.setItem("gists",JSON.stringify(faveList));
+  localStorage.setItem("gists", JSON.stringify(faveList));
   gist.remove();
 }
 function fetchData() {
@@ -75,38 +69,39 @@ function createGistsList(gistsList) {
   var i;
   for (i = 0; i < gistsList.length; i++) {
     //if it wasnt in fave
-    if(!inFaveList(gistsList[i].id)){
+    if (!inFaveList(gistsList[i].id)) {
       gistsDiv.appendChild(
-      createGistDiv(gistsList[i].id,
-      gistsList[i].description, gistsList[i].url));
+        createGistDiv(gistsList[i].id,
+          gistsList[i].description, gistsList[i].url)
+      );
     }
   }
 }
 function createGistDiv(id, desc, url) {
-	  var button;
-	  var gistDiv;
-	  var p;
-	  var a;
-      gistDiv = document.createElement('div');
-      gistDiv.setAttribute('class', 'gist');
-      button = document.createElement('input');
-      button.setAttribute('type', 'button');
-      button.setAttribute('name', 'faveButton');
-      button.setAttribute('value', '+');
-      button.setAttribute("id", id);
-	  button.onclick = function () {
-		document.getElementById(id).parentNode.remove();
-	    addFavourite(createGistDiv(id,desc,url));
-      };
-	  p = document.createElement('p');
-      p.innerHTML = desc + " ";
-      a = document.createElement('a');
-      a.setAttribute("href", url);
-      a.innerHTML = " " + url;
-      p.appendChild(a);
-      gistDiv.appendChild(button);
-      gistDiv.appendChild(p);
-	  return gistDiv;
+  var button;
+  var gistDiv;
+  var p;
+  var a;
+  gistDiv = document.createElement('div');
+  gistDiv.setAttribute('class', 'gist');
+  button = document.createElement('input');
+  button.setAttribute('type', 'button');
+  button.setAttribute('name', 'faveButton');
+  button.setAttribute('value', '+');
+  button.setAttribute("id", id);
+  button.onclick = function () {
+    document.getElementById(id).parentNode.remove();
+    addFavourite(createGistDiv(id, desc, url));
+  };
+  p = document.createElement('p');
+  p.innerHTML = desc + " ";
+  a = document.createElement('a');
+  a.setAttribute("href", url);
+  a.innerHTML = " " + url;
+  p.appendChild(a);
+  gistDiv.appendChild(button);
+  gistDiv.appendChild(p);
+  return gistDiv;
 }
 
 function deleteGistsList() {
@@ -121,8 +116,12 @@ function deleteGistsList() {
 function inFaveList(id) {
   var i;
   for (i = 0; i < faveList.length; i++) {
-    if(faveList[i].id == id)
-		return true;
+    if (faveList[i].id === id) {
+      return true;
+    }
   }
   return false;
 }
+window.onload = function () {
+  displayFavourites();
+};
